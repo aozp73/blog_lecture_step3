@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/hello" method="post" enctype="multipart/form-data">
+        <input type="text" name="title">
+        <input type="file" name="thumnail">
+        <button type="submit">파일전송</button>
+    </form>
+
+    <script>
+        let file = "";
+
+        let json = "file 문자열";
+
+        let data = {
+            "title": "title",
+            "thumnail": json
+        }
+
+        $.ajax({
+            data: JSON.stringify(data),
+            contentType: "application/json"
+        }).done((res) => {
+
+        }).fail((err) => {
+
+        });
+
+    </script>
+</body>
+
+</html>
