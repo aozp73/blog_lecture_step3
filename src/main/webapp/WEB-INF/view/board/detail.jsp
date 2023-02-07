@@ -4,11 +4,11 @@
 
         <div class="container my-3">
 
-            <c:if test="${dto.userId == principal.id}" >
-            <div class="mb-3">
-                <a href="/board/1/updateForm" class="btn btn-warning">수정</a>
-                <button id="btn-delete" class="btn btn-danger">삭제</button>
-            </div>
+            <c:if test="${dto.userId == principal.id}">
+                <div class="mb-3">
+                    <a href="/board/1/updateForm" class="btn btn-warning">수정</a>
+                    <button id="btn-delete" class="btn btn-danger">삭제</button>
+                </div>
             </c:if>
 
 
