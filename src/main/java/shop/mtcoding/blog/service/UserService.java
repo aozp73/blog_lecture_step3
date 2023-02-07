@@ -30,8 +30,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public User 로그인(LoginReqDto loginReqDto) {
-        User principal = userRepository.findByUsernameAndPassword(
-                loginReqDto.getUsername(), loginReqDto.getPassword());
+        User principal = userRepository.findByUsernameAndPassword(loginReqDto.getUsername(), loginReqDto.getPassword());
         if (principal == null) {
             throw new CustomException("유저네임 혹은 패스워드가 잘못 입력되었습니다");
         }

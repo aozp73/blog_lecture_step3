@@ -25,6 +25,7 @@ public class BoardRepositoryTest {
 
         // when
         List<BoardMainRespDto> BoardMainRespDto = boardRepository.findAllWithUser();
+        // JavaObject -> JSON
         String responseBody = om.writeValueAsString(BoardMainRespDto);
         System.out.println("테스트 : " + responseBody);
 

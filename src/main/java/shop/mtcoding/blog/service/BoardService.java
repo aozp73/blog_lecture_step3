@@ -9,6 +9,7 @@ import shop.mtcoding.blog.dto.board.BoardReq.BoardSaveReqDto;
 import shop.mtcoding.blog.handler.ex.CustomException;
 import shop.mtcoding.blog.model.BoardRepository;
 
+@Transactional(readOnly = true)
 @Service
 public class BoardService {
 
@@ -18,11 +19,8 @@ public class BoardService {
     // where 절에 걸리는 파라메터를 앞에 받기
     @Transactional
     public void 글쓰기(BoardSaveReqDto boardSaveReqDto, int userId) {
-        int result = boardRepository.insert(
-                boardSaveReqDto.getTitle(),
-                boardSaveReqDto.getContent(),
-                userId);
-        if(result != 1){
+        int result = boardRepository.insert(boardSaveReqDto.getTitle(), boardSaveReqDto.getContent(), userId);
+        if (result != 1) {
             throw new CustomException("글쓰기 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
