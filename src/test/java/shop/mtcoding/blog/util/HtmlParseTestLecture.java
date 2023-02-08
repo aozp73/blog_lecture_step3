@@ -2,7 +2,7 @@ package shop.mtcoding.blog.util;
 
 import org.junit.jupiter.api.Test;
 
-public class HtmlParseTestPractice {
+public class HtmlParseTestLecture {
 
     @Test
     public void parse_test1() {

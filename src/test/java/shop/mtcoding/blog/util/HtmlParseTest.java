@@ -25,21 +25,21 @@ public class HtmlParseTest {
     public void jsoup_test2() throws Exception {
         String html = "<p>1</p><p><img src=\"data:image/png;base64,iVBORw0KG\"><img src=\"data:image/png;base64,iVBORw0KG\"></p>";
         Document doc = Jsoup.parse(html);
-        // System.out.println(doc);
+        System.out.println(doc);
         Elements els = doc.select("img");
         // System.out.println(els);
 
-        // 아래를 update, insert 할 때 각 1번 해주면 됨
-        if (els.size() == 0) {
-            // 임시사진 제공
-            // DB thumnail -> /images/profile.jfif
-        } else {
-            Element el = els.get(0);
-            String img = el.attr("src");
-            // 아래 값을 DB에 넣는 것임
-            System.out.println(img);
-            // 디비 thumbnail -> img
-        }
+        // // 아래를 update, insert 할 때 각 1번 해주면 됨
+        // if (els.size() == 0) {
+        // // 임시사진 제공
+        // // DB thumnail -> /images/profile.jfif
+        // } else {
+        // Element el = els.get(0);
+        // String img = el.attr("src");
+        // // 아래 값을 DB에 넣는 것임
+        // System.out.println(img);
+        // // 디비 thumbnail -> img
+        // }
     }
 
     @Test

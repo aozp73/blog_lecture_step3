@@ -1,10 +1,5 @@
 package shop.mtcoding.blog.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.blog.dto.ResponseDto;
 import shop.mtcoding.blog.dto.board.BoardReq.BoardSaveReqDto;
@@ -43,36 +36,6 @@ public class BoardController {
 
     @Autowired
     private BoardRepository boardRepository;
-
-    // public void hello(HttpServletRequest request, HttpServletResponse response)
-    // throws IOException {
-    // // title=fsda&content=fdwsa
-    // // body로 data가 날라오면 Buffer로 읽어서 1. getReader로 읽음 2. parsing
-
-    // // get요청으로 오면 Buffer로 읽지 않고(Body가 없음) get url로 파싱하여 request.getParameter로 또
-    // 파싱
-
-    // // x-www-url 방식
-    // // 제일 기본이라 이 파싱방법만 getParameter로 제공 해줌
-    // String title = request.getParameter("title");
-
-    // // BufferedReader br = new BufferedReader(new
-    // // InputStreamReader(request.getInputStream())); 아래 코드와 동일
-    // BufferedReader br = request.getReader();
-
-    // String json = br.readLine(); // body에 json담았으므로 json이 나올 것임
-    // ObjectMapper om = new ObjectMapper();
-    // BoardUpdateReqDto bu = om.readValue(json, BoardUpdateReqDto.class);
-    // // 문자는 의미가 없으므로 ObjectMapper로 파싱해야 함
-
-    // // @RequestBody
-    // // 일단 readLine()으로 버퍼로 읽음
-    // // content type이 text면 그냥 json에 담아서 줌 (파싱할 필요 x)
-    // // content type이 json이면 ObjectMapper로 아래 메서드를 자동으로 진행해 줌
-    // // ObjectMapper om = new ObjectMapper();
-    // // BoardUpdateReqDto bu = om.readValue(json, BoardUpdateReqDto.class);
-
-    // }
 
     @PutMapping("/board/{id}")
     public @ResponseBody ResponseEntity<?> update(@PathVariable int id,
