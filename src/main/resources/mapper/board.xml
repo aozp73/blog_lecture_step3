@@ -5,7 +5,7 @@
 
 <mapper namespace="shop.mtcoding.blog.model.BoardRepository">
     <select id="findByIdWithUser" resultType="shop.mtcoding.blog.dto.board.BoardResp$BoardDetailRespDto">
-        select bt.id, bt.title, bt.user_id, ut.username
+        select bt.id, bt.title, bt.content, bt.user_id, ut.username
         from board_tb bt
         inner join user_tb ut
         on bt.user_id = ut.id
