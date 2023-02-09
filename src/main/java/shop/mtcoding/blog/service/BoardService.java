@@ -11,7 +11,7 @@ import shop.mtcoding.blog.handler.ex.CustomApiException;
 import shop.mtcoding.blog.handler.ex.CustomException;
 import shop.mtcoding.blog.model.Board;
 import shop.mtcoding.blog.model.BoardRepository;
-import shop.mtcoding.blog.util.JsoupThumbnail;
+import shop.mtcoding.blog.util.HtmlParser;
 
 @Transactional(readOnly = true)
 @Service
@@ -24,11 +24,11 @@ public class BoardService {
     @Transactional
     public void 글쓰기(BoardSaveReqDto boardSaveReqDto, int userId) {
 
-        String img = JsoupThumbnail.thumbnail(boardSaveReqDto.getContent(), "img", "src");
+        String img = HtmlParser.getThumbnail(boardSaveReqDto.getContent());
 
         int result = boardRepository.insert(boardSaveReqDto.getTitle(), boardSaveReqDto.getContent(), img, userId);
         if (result != 1) {
-            throw new CustomException("글쓰기 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new CustomApiException("글쓰기 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -66,7 +66,7 @@ public class BoardService {
             throw new CustomApiException("게시글을 수정할 권한이 없습니다", HttpStatus.FORBIDDEN);
         }
 
-        String img = JsoupThumbnail.thumbnail(boardUpdateReqDto.getContent(), "img", "src");
+        String img = HtmlParser.getThumbnail(boardUpdateReqDto.getContent());
 
         try {
             boardRepository.updateById(id, boardUpdateReqDto.getTitle(), boardUpdateReqDto.getContent(), img);

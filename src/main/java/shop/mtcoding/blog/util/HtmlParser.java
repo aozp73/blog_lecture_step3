@@ -5,19 +5,19 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class JsoupThumbnail {
-    public static String thumbnail(String html, String tag, String attribute) {
+public class HtmlParser {
+    public static String getThumbnail(String html) {
         Document doc = Jsoup.parse(html);
-        Elements els = doc.select(tag);
-        String img = "";
+        Elements els = doc.select("img");
+        String thumbnail = "";
 
         if (els.size() == 0) {
-            img = "/images/dora.png";
+            thumbnail = "/images/dora.png";
         } else {
 
             Element el = els.get(0);
-            img = el.attr(attribute);
+            thumbnail = el.attr("src");
         }
-        return img;
+        return thumbnail;
     }
 }

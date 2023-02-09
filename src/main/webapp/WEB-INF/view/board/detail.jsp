@@ -33,7 +33,7 @@
             </div>
 
             <div>
-                <h3>${dto.title}</h3>
+                <h1><b>${dto.title}</b></h1>
             </div>
             <hr />
             <div>
