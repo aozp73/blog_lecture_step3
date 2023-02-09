@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.blog.dto.board.BoardReq.BoardSaveReqDto;
 import shop.mtcoding.blog.dto.board.BoardReq.BoardUpdateReqDto;
 import shop.mtcoding.blog.handler.ex.CustomApiException;
-import shop.mtcoding.blog.handler.ex.CustomException;
 import shop.mtcoding.blog.model.Board;
 import shop.mtcoding.blog.model.BoardRepository;
 import shop.mtcoding.blog.util.HtmlParser;
@@ -66,10 +65,10 @@ public class BoardService {
             throw new CustomApiException("게시글을 수정할 권한이 없습니다", HttpStatus.FORBIDDEN);
         }
 
-        String img = HtmlParser.getThumbnail(boardUpdateReqDto.getContent());
+        String thumbnail = HtmlParser.getThumbnail(boardUpdateReqDto.getContent());
 
         try {
-            boardRepository.updateById(id, boardUpdateReqDto.getTitle(), boardUpdateReqDto.getContent(), img);
+            boardRepository.updateById(id, boardUpdateReqDto.getTitle(), boardUpdateReqDto.getContent(), thumbnail);
         } catch (Exception e) {
             throw new CustomApiException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
             // 추가로 로그를 남겨야 함
