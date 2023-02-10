@@ -14,4 +14,5 @@ public class Board {
     private String thumbnail;
     private int userId;
     private Timestamp createdAt;
+
 }
