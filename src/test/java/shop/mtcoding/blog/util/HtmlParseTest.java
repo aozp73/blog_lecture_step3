@@ -9,6 +9,20 @@ import org.junit.jupiter.api.Test;
 public class HtmlParseTest {
 
     @Test
+    public void jsoup_test3() throws Exception {
+        String url = "https://search.naver.com/search.naver?where=view&sm=tab_jum&query=%EB%B6%80%EC%82%B0+%EB%A7%9B%EC%A7%91";
+        Document doc = Jsoup.connect(url)
+                .get();
+        // System.out.println(doc);
+
+        Elements elements = doc.select(
+                "._svp_item .total_wrap a img");
+        elements.stream().forEach((e) -> {
+            System.out.println(e.attr("src"));
+        });
+    }
+
+    @Test
     public void jsoup_test1() throws Exception {
         System.out.println("=====================================");
         Document doc = Jsoup.connect("https://en.wikipedia.org/").get();
