@@ -17,7 +17,7 @@
         from board_tb bt
         inner join user_tb ut
         on bt.user_id = ut.id
-        order by bt.id desc
+        order by bt.id desc 
     </select>
 
     <select id="findAll" resultType="shop.mtcoding.blog.model.Board">

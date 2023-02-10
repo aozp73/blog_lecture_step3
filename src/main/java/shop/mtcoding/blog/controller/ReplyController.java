@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import shop.mtcoding.blog.dto.reply.ReplyReq.ReplySaveReqDto;
 import shop.mtcoding.blog.handler.ex.CustomException;
 import shop.mtcoding.blog.model.User;
+import shop.mtcoding.blog.service.ReplyService;
 
 @Controller
 public class ReplyController {
 
     @Autowired
     private HttpSession session;
+
+    @Autowired
+    private ReplyService replyService;
 
     // 패스 : 개발자마다 Convention이 다름
     // insert는 where절이 없으므로 id를 안 적는 사람도 있고
@@ -35,7 +39,7 @@ public class ReplyController {
             throw new CustomException("boardId가 넘어오지 않았습니다.");
         }
 
-        // 서비스 호출 (replySaveReqDto, principal.getId())
+        replyService.댓글쓰기(replySaveReqDto, principal.getId());
 
         return "redirect:/board/" + replySaveReqDto.getBoardId();
     }
