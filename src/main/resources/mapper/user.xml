@@ -23,13 +23,14 @@
 
     <insert id="insert">
         insert into user_tb (username, password, email, created_at) values(#{username}, #{password}, #{email}, now())
-    </insert>    
+    </insert>
+
 
     <delete id="deleteById" >
         delete from user_tb where id = #{id} 
     </delete>    
 
     <update id="updateById" >
-        update user_tb set username= #{username},password= #{password}, email= #{email} where id = #{id} 
+        update user_tb set username= #{username}, password= #{password}, email= #{email}, profile=#{profile} where id = #{id} 
     </update>    
 </mapper>

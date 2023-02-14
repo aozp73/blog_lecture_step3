@@ -1,5 +1,6 @@
 package shop.mtcoding.blog.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -47,6 +48,20 @@ public class ReplyControllerTest {
 
         mockSession = new MockHttpSession();
         mockSession.setAttribute("principal", user);
+    }
+
+    @Test
+    public void delete_test() throws Exception {
+        // given
+        int replyId = 1;
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                delete("/reply/" + replyId)
+                        .session(mockSession));
+
+        // then
+        resultActions.andExpect(status().isOk());
     }
 
     @Test

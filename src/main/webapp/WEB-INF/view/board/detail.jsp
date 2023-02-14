@@ -51,7 +51,9 @@
                             <div>${reply.comment}</div>
                             <div class="d-flex">
                                 <div class="font-italic">작성자 : ${reply.username} &nbsp;</div>
+                            <c:if test="${principal.id == reply.userId}" >
                                 <button onClick="deleteByReplyId(${reply.id})" class="badge bg-secondary">삭제</button>
+                            </c:if>
                             </div>
                         </li>
                     </c:forEach>
@@ -62,10 +64,22 @@
 
         <script>
             function deleteByReplyId(id) {
+                $.ajax({
+                    type: "delete",
+                    url: "/reply/"+id,
+                    dataType: "json"
+                }).done((res) => {
+                    alert(res.msg);
+                    // location.reload();
+                    $("#reply-"+id).remove()
+                }).fail((err)=>{
+                    alert(err.responseJSON.msg);
+                });
                 // 2가지 방법이 있는데
                 // location.reload() 는 한번 더 get으로 재 요청하는것이므로 비효울적
                 // $("#reply-"+id).remove();
                 // location.reload();
+
             }
             function deleteById(id) {
                 $.ajax({
