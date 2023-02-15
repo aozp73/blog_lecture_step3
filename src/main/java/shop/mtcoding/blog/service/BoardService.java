@@ -90,7 +90,6 @@ public class BoardService {
             boardRepository.updateById(id, boardUpdateReqDto.getTitle(), boardUpdateReqDto.getContent(), thumbnail);
         } catch (Exception e) {
             throw new CustomApiException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-            // 추가로 로그를 남겨야 함
         }
     }
 }

@@ -14,7 +14,7 @@
 
             <div class="d-flex" style="position: absolute; left: 2px">
 
-                <div class="container my-3">
+                <div class="container mt-5">
                     <div class="list-group">
                         <a href="/admin/userForm" class="list-group-item list-group-item-action active"
                             aria-current="true">
@@ -31,39 +31,45 @@
 
             </div>
 
-            <div class="d-flex" style="position: absolute; top:30px; left: 220px">
-                <table class="table">
-                    <thead>
-                        <tr class="my-text-align">
-                            <th scope="col">#</th>
-                            <th scope="col">id</th>
-                            <th scope="col">유저 아이디</th>
-                            <th scope="col">비밀번호</th>
-                            <th scope="col">이메일</th>
-                            <th scope="col"></th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${userList}" var="user">
+            <div class="d-flex justify-content-center">
+                <div style="position: absolute; top: 50px">
+
+                    <table class="table">
+                        <thead>
                             <tr class="my-text-align">
-                                <th scope="row"></th>
-                                <td>${user.id}</td>
-                                <td>${user.username}</td>
-                                <td>${user.password}</td>
-                                <td>${user.email}</td>
-                                <c:if test="${user.username != 'ADMIN'}" >
-                                <td><button onclick="deleteById(`${user.id}`)" class="btn-xs">삭제</button>
-                                </td>
-                                </c:if>
+                                <th scope="col">#</th>
+                                <th scope="col">id</th>
+                                <th scope="col">유저 아이디</th>
+                                <th scope="col">비밀번호</th>
+                                <th scope="col">이메일</th>
+                                <th scope="col">가입일자</th>
+                                <th scope="col"></th>
+
                             </tr>
+                        </thead>
 
-                        </c:forEach>
+                        <tbody>
+                            <c:forEach items="${userList}" var="user">
+                                <tr class="my-text-align">
+                                    <th scope="row"></th>
+                                    <td>${user.id}</td>
+                                    <td>${user.username}</td>
+                                    <td>${user.password}</td>
+                                    <td>${user.email}</td>
+                                    <td>${user.createdAtToString}</td>
+                                    <c:if test="${user.username != 'ADMIN'}">
+                                        <td><button onclick="deleteById(`${user.id}`)" class="btn-xs">삭제</button>
+                                        </td>
+                                    </c:if>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
 
-
-                    </tbody>
-                </table>
+                </div>
             </div>
+
 
         </div>
 

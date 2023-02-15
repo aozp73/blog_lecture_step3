@@ -14,7 +14,7 @@
 
             <div class="d-flex" style="position: absolute; left: 2px">
 
-                <div class="container my-3">
+                <div class="container mt-5">
                     <div class="list-group">
                         <a href="/admin/userForm" class="list-group-item list-group-item-action">
                             회원관리
@@ -30,15 +30,17 @@
 
             </div>
 
-            <div class="d-flex" style="position: absolute; top:30px; left: 220px">
+                        <div class="d-flex justify-content-center">
+                <div style="position: absolute; top: 50px">
             <table class="table">
                     <thead>
-                        <tr>
+                        <tr class="my-text-align">
                             <th scope="col">#</th>
                             <th scope="col">댓글 번호</th>
                             <th scope="col">게시글 번호</th>
                             <th scope="col">작성자</th>
                             <th scope="col">댓글 내용</th>
+                            <th scope="col">작성일자</th>
                             <th scope="col"></th>
 
                         </tr>
@@ -51,6 +53,7 @@
                                 <td>${reply.boardId}</td>
                                 <td>${reply.username}</td>
                                 <td>${reply.comment}</td>
+                                <td>${reply.createdAtToString}</td>
                                 <td><button onclick="deleteById(`${reply.id}`)" class="btn-xs">삭제</button>
                                 </td>
                             </tr>
@@ -60,6 +63,7 @@
 
                     </tbody>
                 </table>
+                </div>
             </div>
 
         </div>
