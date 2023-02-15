@@ -22,4 +22,13 @@ public class BoardResp {
         private String content;
         private String username;
     }
+
+    @Getter
+    @Setter
+    public static class BoardADMINRespDto {
+        private int id;
+        private String title;
+        private String content;
+        private String username;
+    }
 }

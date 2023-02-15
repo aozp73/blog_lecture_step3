@@ -9,6 +9,8 @@ import shop.mtcoding.blog.dto.reply.ReplyResp.ReplyDetailRespDto;
 
 @Mapper
 public interface ReplyRepository {
+    public List<ReplyDetailRespDto> findAllWithUser();
+
     public List<ReplyDetailRespDto> findByBoardIdWithUser(int boardId);
 
     public List<Reply> findAll();

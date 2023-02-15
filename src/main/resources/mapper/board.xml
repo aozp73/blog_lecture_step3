@@ -20,6 +20,14 @@
         order by bt.id desc 
     </select>
 
+    <select id="findAllWithUserForADMIN" resultType="shop.mtcoding.blog.dto.board.BoardResp$BoardADMINRespDto">
+        select bt.id, bt.title, bt.content, ut.username
+        from board_tb bt
+        inner join user_tb ut
+        on bt.user_id = ut.id
+        order by bt.id desc 
+    </select>
+
     <select id="findAll" resultType="shop.mtcoding.blog.model.Board">
         select * from board_tb
     </select>

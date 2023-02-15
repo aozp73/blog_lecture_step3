@@ -55,6 +55,11 @@ public class UserService {
         if (principal == null) {
             throw new CustomException("유저네임 혹은 패스워드가 잘못 입력되었습니다");
         }
+
+        if (principal.getRole().equals("ADMIN")) {
+            throw new CustomException("해당하는 로그인창 이용 권장");
+        }
+
         return principal;
     }
 

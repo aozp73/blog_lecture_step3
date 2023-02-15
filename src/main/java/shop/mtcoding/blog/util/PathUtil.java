@@ -15,12 +15,8 @@ public class PathUtil {
         // getProperty : \workspace\project_lab\blog_lecture_step2
         return System.getProperty("user.dir") + "\\src\\main\\resources\\static\\";
     }
-
-    // getOriginalFilename() : \images\프로필사진.png
-    // getStaticFolder : \workspace\project_lab\blog_lecture_step2
-
-    // imageFilePath
-    // =>\workspace\project_lab\blog_lecture_step2\src\main\resources\static\images\프로필사진.png
+    // getOriginalFilename() : 프로필사진.png
+    // getProperty : \workspace\project_lab\blog_lecture_step2
 
     public static String writeImageFile(MultipartFile profile) {
         UUID uuid = UUID.randomUUID();
@@ -28,7 +24,12 @@ public class PathUtil {
         // 하드 디스크에 저장 될 경로
         String uuidImageRealName = "\\images\\" + uuid + "_" + profile.getOriginalFilename();
 
+        // getStaticFolder() :
+        // \workspace\project_lab\blog_lecture_step2\src\main\resources\static
         String staticFolder = getStaticFolder();
+        // imageFilePath :
+        // \workspace\project_lab\blog_lecture_step2\src\main\resources\static\images\
+        // uuid값_프로필사진.png
         Path imageFilePath = Paths.get(staticFolder + "\\" + uuidImageRealName);
 
         try {
@@ -38,9 +39,7 @@ public class PathUtil {
         } catch (Exception e) {
             throw new CustomException("사진을 웹서버에 저장하지 못하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
         // db에 들어갈 이름은 / 그래야 src에서 찾아냄
         return "/images/" + uuid + "_" + profile.getOriginalFilename();
     }
-
 }

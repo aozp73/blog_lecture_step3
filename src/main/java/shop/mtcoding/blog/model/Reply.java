@@ -11,6 +11,6 @@ public class Reply {
     private int id;
     private String comment;
     private int userId;
-    private int baordId;
+    private int boardId;
     private Timestamp createdAt;
 }

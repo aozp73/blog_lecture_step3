@@ -25,10 +25,6 @@
                         <input type="email" name="email" class="form-control" placeholder="Enter email" id="email">
                     </div>
 
-                    <div class="form-group mb-2">
-                        <input type="address" name="email" class="form-control" placeholder="Enter email" id="email">
-                    </div>
-
                     <button type="submit" class="btn btn-primary">회원가입</button>
                 </form>
 

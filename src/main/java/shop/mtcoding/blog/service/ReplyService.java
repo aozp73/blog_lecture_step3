@@ -10,6 +10,8 @@ import shop.mtcoding.blog.handler.ex.CustomApiException;
 import shop.mtcoding.blog.handler.ex.CustomException;
 import shop.mtcoding.blog.model.Reply;
 import shop.mtcoding.blog.model.ReplyRepository;
+import shop.mtcoding.blog.model.User;
+import shop.mtcoding.blog.model.UserRepository;
 
 @Transactional(readOnly = true)
 @Service
@@ -17,6 +19,9 @@ public class ReplyService {
 
     @Autowired
     private ReplyRepository replyRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     // where 절에 걸리는 파라메터를 앞에 받기
     @Transactional
@@ -32,6 +37,9 @@ public class ReplyService {
     @Transactional
     public void 댓글삭제(int id, int principalId) {
         Reply replyPS = replyRepository.findById(id); // 여기서 받는 reply는 Entity임 DB로 받는 것임
+        User ADMIN = userRepository.findById(principalId);
+        String check = ADMIN.getRole();
+
         // 삭제할 댓글이 있는지
         if (replyPS == null) {
             throw new CustomApiException("삭제할 댓글이 존재하지 않습니다");
@@ -39,6 +47,16 @@ public class ReplyService {
 
         // 권한 체크
         if (replyPS.getUserId() != principalId) {
+            if (check.equals("ADMIN")) {
+                try {
+                    replyRepository.deleteById(id);
+                } catch (Exception e) {
+                    throw new CustomApiException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+                    // 추가로 로그를 남겨야 함
+                }
+                return;
+            }
+
             throw new CustomApiException("댓글을 삭제할 권한이 없습니다", HttpStatus.FORBIDDEN);
         }
 

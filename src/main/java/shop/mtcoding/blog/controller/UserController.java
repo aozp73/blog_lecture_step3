@@ -40,10 +40,10 @@ public class UserController {
             throw new CustomException("사진이 전송되지 않았습니다");
         }
 
-        System.out.println("테스트 :" + profile.getContentType());
+        // System.out.println("테스트 :" + profile.getContentType());
         // profile에서 사진이 아니면 exception 터트리기 코드 하나 더 필요
         // 이걸 하지 않으면 포스트맨으로 사진 아닌 것을 전송할 수 있음 (여기까지 Controller의 역할)
-        if (!profile.getContentType().contains("image")) {
+        if (!profile.getContentType().startsWith("image")) {
             throw new CustomException("사진 파일만 업로드 할 수 있습니다.");
         }
 
@@ -63,7 +63,7 @@ public class UserController {
 
         User userPS = userRepository.findById(principal.getId());
         model.addAttribute("user", userPS);
-        // 권한
+
         return "user/profileUpdateForm";
     }
 
