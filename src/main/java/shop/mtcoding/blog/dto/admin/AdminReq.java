@@ -22,6 +22,8 @@ public class AdminReq {
     @Getter
     public static class AdminSendEmailReqDto {
         private String emailList;
+        private String title;
+        private String content;
 
     }
 }

@@ -38,6 +38,7 @@ import shop.mtcoding.blog.model.UserRepository;
 import shop.mtcoding.blog.service.AdminService;
 import shop.mtcoding.blog.service.BoardService;
 import shop.mtcoding.blog.service.ReplyService;
+import shop.mtcoding.blog.util.AdminEmailUtil;
 
 @RequiredArgsConstructor
 @Controller
@@ -57,39 +58,10 @@ public class AdminController {
 
     @PutMapping("/admin/email")
     public ResponseEntity<?> tes(@RequestBody AdminSendEmailReqDto adminSendEmailReqDto) {
-        String beforeParse = adminSendEmailReqDto.getEmailList();
-        List<String> list = new ArrayList<>();
-        String content = "";
-        StringTokenizer st = new StringTokenizer(beforeParse, "/");
-        // System.out.println("테스트" + adminSendEmailReqDto.getEmailList());
-        while (st.hasMoreTokens()) {
-            list.add(st.nextToken());
-        }
-        for (String email : list) {
-            System.out.println("테스트1 : " + email);
-        }
-        for (int i = 0; i < list.size(); i++) {
-            if (!list.get(i).contains("@")) {
-                content += list.get(i);
-                list.remove(i);
-            }
-        }
-        int userCount = list.size();
-        final String ADDRESS = "aozp73@gmail.com";
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo((String[]) list.toArray(new String[userCount]));
-        message.setFrom(ADDRESS);
-        message.setSubject(content);
-        message.setText(content);
-        // System.out.println(message.toString());
 
-        javaMailSender.send(message);
-        // for (String email : list) {
-        // System.out.println("테스트2 : " + email);
-        // }
-        // System.out.println("테스트2" + content);
+        javaMailSender.send(AdminEmailUtil.sendEmail(adminSendEmailReqDto));
 
-        return new ResponseEntity<>(new ResponseDto<>(1, "이메일 발송 성공", null), HttpStatus.CREATED);
+        return new ResponseEntity<>(new ResponseDto<>(1, "이메일 전송 성공", null), HttpStatus.OK);
     }
 
     @GetMapping("admin/search/reply")

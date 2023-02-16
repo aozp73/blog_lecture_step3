@@ -109,7 +109,7 @@
                     <div id="sendEmailBox" class="d-flex">
                         <button class="btn btn-primary" type="button" onclick="sendList()">Email</button>
                     </div>
-                    <div id="sendEmailContent">
+                    <div style="position: absolute; left: -270px; bottom: -10px" id="sendEmailContent">
 
                     </div>
 
@@ -133,17 +133,18 @@
                 } else {
                     let el1 = `<div id="emailCheck"><button class="btn btn-warning" type="button" onclick="sendEmail()">Send</button></div>`;
                     $("#sendEmailBox").append(el1);
-                    let el2 = `<textarea id="emailContent" name=""  cols="30" rows="10"></textarea>`;
+                    let el2 = `<div><textarea id="emailTitle" name=""  cols="30" rows="1"></textarea></div>`;
+                    let el3 = `<textarea id="emailContent" name=""  cols="30" rows="10"></textarea>`;
                     $("#sendEmailContent").append(el2);
+                    $("#sendEmailContent").append(el3);
 
                     // let el11 = `<input class="form-check-input" type = "checkbox" value = "" id = "mailCheck-` + index + `">;`
 
-                    for (let index = 1; index <= `${userList.size()}`; index++) {
+                    for (let index = 2; index <= `${userList.size()}`; index++) {
                         let el3 = `<input class="form-check-input" type = "checkbox" value = "" id = "mailCheck-` +
                             index +
                             `">`
-
-                        $("#mailCheckBox-" + index).append(el3);
+                            $("#mailCheckBox-" + index).append(el3);
                     }
                 }
 
@@ -159,11 +160,16 @@
                         cnt++;
                     }
                 }
-                emailList += $("#emailContent").val() + "/"
-                console.log($("#emailContent").val());
+                let title = $("#emailTitle").val();
+                let content = $("#emailContent").val();
+
+                
+                // console.log($("#emailContent").val());
 
                 let emailObj = {
-                    emailList: emailList
+                    emailList: emailList,
+                    title: title,
+                    content: content
                 }
                 console.log("ajax통신전 디버깅" + emailObj.emailList);
 
@@ -175,7 +181,7 @@
                     dataType: "json"
                 }).done((res) => {
                     alert(res.msg);
-                    location.href = "/";
+                    location.href = "/admin/userForm";
                 }).fail((err) => {
                     alert(err.responseJSON.msg);
                 });
