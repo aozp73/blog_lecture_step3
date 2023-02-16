@@ -33,7 +33,7 @@ public class UserService {
         userPS.setProfile(uuidImageName);
 
         userRepository.updateById(userPS.getId(), userPS.getUsername(), userPS.getPassword(), userPS.getEmail(),
-                userPS.getProfile(), userPS.getCreatedAt());
+                userPS.getProfile(), userPS.getRole(), userPS.getCreatedAt());
         return userPS;
     }
 

@@ -31,6 +31,8 @@
     </delete>    
 
     <update id="updateById" >
-        update user_tb set username= #{username}, password= #{password}, email= #{email}, profile=#{profile} where id = #{id} 
-    </update>    
+        update user_tb set username= #{username}, password=#{password}, email= #{email}, profile=#{profile}, role=#{role} where id = #{id} 
+    </update>
+
+
 </mapper>

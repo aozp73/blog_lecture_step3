@@ -40,6 +40,7 @@
                             <tr class="my-text-align">
                                 <th scope="col">#</th>
                                 <th scope="col">id</th>
+                                <th scope="col">회원등급</th>
                                 <th scope="col">유저 아이디</th>
                                 <th scope="col">비밀번호</th>
                                 <th scope="col">이메일</th>
@@ -54,6 +55,39 @@
                                 <tr class="my-text-align">
                                     <th scope="row"></th>
                                     <td>${user.id}</td>
+                                    <td>   
+
+                                    <c:if test="${user.role != 'ADMIN'}" >  
+
+                                    <select id="roleChange" name="role" onchange="changeRole(this, ${user.id})" >
+
+                                        <c:choose>
+                                           <c:when test="${user.role == 'user'}">
+                                            <option value="user" selected>일반회원</option>
+                                           </c:when>
+                                           <c:otherwise>
+                                            <option value="user">일반회원</option>
+                                           </c:otherwise>
+                                        </c:choose>
+
+                                        <c:choose>
+                                           <c:when test="${user.role == 'manager'}">
+                                            <option value="manager" selected>매니저</option>
+                                           </c:when>
+                                           <c:otherwise>
+                                            <option value="manager">매니저</option>
+                                           </c:otherwise>
+                                        </c:choose>
+
+                                    </select>
+
+                                    </c:if>
+
+                                    <c:if test="${user.role == 'ADMIN'}" >
+                                            ${user.role}
+                                    </c:if>
+
+                                    </td>
                                     <td>${user.username}</td>
                                     <td>${user.password}</td>
                                     <td>${user.email}</td>
@@ -74,6 +108,33 @@
         </div>
 
         <script>
+            function changeRole(obj, id){
+                // console.log("테스트1"+obj.value);
+                // console.log("테스트2"+id);
+                // let changeRole = obj.value;
+                // let changeUserId = id;
+
+                let changeData ={
+                    changeUserId: id,
+                    changeRole: obj.value
+                }
+                $.ajax({
+                    type: "put",
+                    url: "/admin/user/role",
+                    data: JSON.stringify(changeData),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                }).done((res) => {
+                    alert(res.msg);
+                    location.href = "/admin/userForm";
+                }).fail((err)=>{
+                    alert(err.responseJSON.msg);
+                });
+
+            }
+
+
+
             function deleteById(id) {
                 $.ajax({
                     type: "delete",

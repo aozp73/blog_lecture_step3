@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import lombok.RequiredArgsConstructor;
 import shop.mtcoding.blog.dto.ResponseDto;
+import shop.mtcoding.blog.dto.admin.AdminReq.AdminRoleChangeReqDto;
 import shop.mtcoding.blog.dto.board.BoardResp.BoardADMINRespDto;
 import shop.mtcoding.blog.dto.reply.ReplyResp.ReplyDetailRespDto;
 import shop.mtcoding.blog.dto.user.UserReq.LoginReqDto;
@@ -27,7 +30,6 @@ import shop.mtcoding.blog.model.UserRepository;
 import shop.mtcoding.blog.service.AdminService;
 import shop.mtcoding.blog.service.BoardService;
 import shop.mtcoding.blog.service.ReplyService;
-import shop.mtcoding.blog.service.UserService;
 
 @RequiredArgsConstructor
 @Controller
@@ -39,10 +41,22 @@ public class AdminController {
     private final BoardRepository boardRepository;
     private final ReplyRepository replyRepository;
 
-    private final UserService userService;
     private final BoardService boardService;
     private final ReplyService replyService;
     private final AdminService adminService;
+
+    @PutMapping("admin/user/role")
+    public ResponseEntity<?> UpdateUserRole(@RequestBody AdminRoleChangeReqDto adminRoleChangeReqDto) {
+
+        User ADMIN = (User) session.getAttribute("ADMIN");
+        if (ADMIN == null) {
+            throw new CustomApiException("관리자 권한이 없습니다", HttpStatus.FORBIDDEN);
+        }
+
+        adminService.직책변경(adminRoleChangeReqDto);
+        System.out.println("디버깅1");
+        return new ResponseEntity<>(new ResponseDto<>(1, "직책변경 성공", null), HttpStatus.OK);
+    }
 
     @DeleteMapping("admin/user/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable int id) {

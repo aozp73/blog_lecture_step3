@@ -26,6 +26,7 @@ public interface UserRepository {
                         @Param("password") String password,
                         @Param("email") String email,
                         @Param("profile") String profile,
+                        @Param("role") String role,
                         @Param("createdAt") Timestamp createdAt);
 
         public int deleteById(int id);

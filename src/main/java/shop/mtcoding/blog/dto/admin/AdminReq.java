@@ -10,4 +10,11 @@ public class AdminReq {
         private String username;
         private String password;
     }
+
+    @Setter
+    @Getter
+    public static class AdminRoleChangeReqDto {
+        private int changeUserId;
+        private String changeRole;
+    }
 }
