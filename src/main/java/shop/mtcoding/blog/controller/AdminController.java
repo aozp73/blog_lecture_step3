@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -51,6 +53,8 @@ public class AdminController {
     private final ReplyService replyService;
     private final AdminService adminService;
 
+    private final JavaMailSender javaMailSender;
+
     @PutMapping("/admin/email")
     public ResponseEntity<?> tes(@RequestBody AdminSendEmailReqDto adminSendEmailReqDto) {
         String beforeParse = adminSendEmailReqDto.getEmailList();
@@ -70,7 +74,16 @@ public class AdminController {
                 list.remove(i);
             }
         }
+        int userCount = list.size();
+        final String ADDRESS = "aozp73@gmail.com";
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo((String[]) list.toArray(new String[userCount]));
+        message.setFrom(ADDRESS);
+        message.setSubject(content);
+        message.setText(content);
+        // System.out.println(message.toString());
 
+        javaMailSender.send(message);
         // for (String email : list) {
         // System.out.println("테스트2 : " + email);
         // }
