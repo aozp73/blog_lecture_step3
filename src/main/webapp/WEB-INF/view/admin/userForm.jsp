@@ -109,15 +109,12 @@
 
         <script>
             function changeRole(obj, id){
-                // console.log("테스트1"+obj.value);
-                // console.log("테스트2"+id);
-                // let changeRole = obj.value;
-                // let changeUserId = id;
 
                 let changeData ={
                     changeUserId: id,
                     changeRole: obj.value
                 }
+                
                 $.ajax({
                     type: "put",
                     url: "/admin/user/role",

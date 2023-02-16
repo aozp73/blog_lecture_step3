@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import lombok.RequiredArgsConstructor;
 import shop.mtcoding.blog.dto.ResponseDto;
@@ -45,6 +48,31 @@ public class AdminController {
     private final ReplyService replyService;
     private final AdminService adminService;
 
+    @GetMapping("admin/search/reply")
+    public @ResponseBody String searchUser(Model model, String serachKeyword) {
+        Gson gson = new Gson();
+        User ADMIN = (User) session.getAttribute("ADMIN");
+        if (ADMIN == null) {
+            throw new CustomApiException("관리자 권한이 없습니다", HttpStatus.FORBIDDEN);
+        }
+
+        List<ReplyDetailRespDto> searchDtos = adminService.댓글검색(serachKeyword);
+
+        return gson.toJson(searchDtos);
+    }
+
+    @GetMapping("admin/search/board")
+    public @ResponseBody String searchBoard(String serachKeyword) {
+        Gson gson = new Gson();
+        User ADMIN = (User) session.getAttribute("ADMIN");
+        if (ADMIN == null) {
+            throw new CustomApiException("관리자 권한이 없습니다", HttpStatus.FORBIDDEN);
+        }
+
+        List<BoardADMINRespDto> searchDtos = adminService.게시물검색(serachKeyword);
+        return gson.toJson(searchDtos);
+    }
+
     @PutMapping("admin/user/role")
     public ResponseEntity<?> UpdateUserRole(@RequestBody AdminRoleChangeReqDto adminRoleChangeReqDto) {
 
@@ -54,7 +82,6 @@ public class AdminController {
         }
 
         adminService.직책변경(adminRoleChangeReqDto);
-        System.out.println("디버깅1");
         return new ResponseEntity<>(new ResponseDto<>(1, "직책변경 성공", null), HttpStatus.OK);
     }
 

@@ -1,14 +1,20 @@
 package shop.mtcoding.blog.service;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import shop.mtcoding.blog.dto.admin.AdminReq.AdminRoleChangeReqDto;
+import shop.mtcoding.blog.dto.board.BoardResp.BoardADMINRespDto;
+import shop.mtcoding.blog.dto.reply.ReplyResp.ReplyDetailRespDto;
 import shop.mtcoding.blog.dto.user.UserReq.LoginReqDto;
 import shop.mtcoding.blog.handler.ex.CustomApiException;
 import shop.mtcoding.blog.handler.ex.CustomException;
+import shop.mtcoding.blog.model.BoardRepository;
+import shop.mtcoding.blog.model.ReplyRepository;
 import shop.mtcoding.blog.model.User;
 import shop.mtcoding.blog.model.UserRepository;
 
@@ -18,6 +24,24 @@ import shop.mtcoding.blog.model.UserRepository;
 public class AdminService {
 
     private final UserRepository userRepository;
+
+    private final BoardRepository boardRepository;
+
+    private final ReplyRepository replyRepository;
+
+    @Transactional(readOnly = true)
+    public List<ReplyDetailRespDto> 댓글검색(String keyword) {
+        List<ReplyDetailRespDto> searchDtos = replyRepository.findAllWithUserForSearch(keyword);
+
+        return searchDtos;
+    }
+
+    @Transactional(readOnly = true)
+    public List<BoardADMINRespDto> 게시물검색(String keyword) {
+        List<BoardADMINRespDto> searchDtos = boardRepository.findAllByKeyWordWithUserForADMIN(keyword);
+
+        return searchDtos;
+    }
 
     @Transactional
     public void 직책변경(AdminRoleChangeReqDto adminRoleChangeReqDto) {

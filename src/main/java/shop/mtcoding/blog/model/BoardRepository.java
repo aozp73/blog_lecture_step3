@@ -18,6 +18,8 @@ public interface BoardRepository {
 
         public List<BoardADMINRespDto> findAllWithUserForADMIN();
 
+        public List<BoardADMINRespDto> findAllByKeyWordWithUserForADMIN(String keyword);
+
         public List<Board> findAll();
 
         public Board findById(int id);

@@ -45,7 +45,7 @@
 
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="searchArea">
                         <c:forEach items="${replyList}" var="reply">
                             <tr class="my-text-align">
                                 <th scope="row"></th>
@@ -67,7 +67,70 @@
             </div>
 
         </div>
+
+                <div class="mx-quto input-group justify-content-center" style="position:absolute; bottom: 300px">
+            <div>
+                <mx-auto>
+                    <input id="replySearch" name="query" type="text" class="form-control" placeholder="검색어 입력"
+                        aria-label="search" value="" aria-describedby="button-addon2">
+                </mx-auto>
+            </div>
+            <div>
+                <button id="button-addon2" class="btn btn-primary" type="submit" onclick="serachGet()">검색</button>
+            </div>
+        </div>
         <script>
+
+             function serachGet() {
+                let search = $("#replySearch").val();
+                $.ajax({
+                    type: "get",
+                    url: "/admin/search/reply/?serachKeyword=" + search,
+                    dataType: "json"
+                }).done((res) => {
+                    $("#searchArea").empty();
+
+                    // console.log(res[0].id);
+                    // console.log(res[0].title);
+                    // console.log(res[0].content);
+                    // console.log(res[0].username);
+                    // console.log(res[0].createdAt);
+
+                    for (let i = 0; i < res.length; i++) {
+                        let id = res[i].id;
+                        let boardId = res[i].boardId;
+                        let username = res[i].username;
+                        let comment = res[i].comment;
+                        let createdAt = res[i].createdAt;
+
+                        let searchRes = `
+                        
+                        <tr class= "my-text-align" >
+                                <th scope="row"></th>
+                                <td>`+ id + `</td>
+                                <td>`+ boardId + `</td>
+                                <td>`+ username + `</td>
+                                <td>`+ comment + `</td>
+                                <td>`+ createdAt + `</td>
+                                <td><button onclick="deleteById(`+ id + `)" class="btn-xs">삭제</button>
+                                </td>
+                            </tr >
+                        `;
+
+                        $("#searchArea").append(searchRes);
+                    }
+
+                }).fail((err) => {
+                    alert(err.responseJSON.msg);
+                });
+
+            }
+
+            $("#replySearch").keyup(() => {
+                serachGet();
+            })
+
+
             function deleteById(id) {
                 $.ajax({
                     type: "delete",

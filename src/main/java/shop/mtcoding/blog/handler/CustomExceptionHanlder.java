@@ -23,4 +23,5 @@ public class CustomExceptionHanlder {
     public ResponseEntity<?> customApiException(CustomApiException e) {
         return new ResponseEntity<>(new ResponseDto<>(-1, e.getMessage(), null), e.getStatus());
     }
+
 }
