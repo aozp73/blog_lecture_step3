@@ -81,6 +81,7 @@
         </div>
         <script>
 
+
              function serachGet() {
                 let search = $("#replySearch").val();
                 $.ajax({
@@ -130,6 +131,11 @@
                 serachGet();
             })
 
+            $("#replySearch").keypress(function(e) {
+            if (e.keyCode === 13) {
+                serachGet();
+            }
+            });
 
             function deleteById(id) {
                 $.ajax({

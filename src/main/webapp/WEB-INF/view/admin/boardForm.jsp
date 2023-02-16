@@ -59,6 +59,7 @@
                         </tbody>
 
                     </table>
+
                 </div>
             </div>
         </div>
@@ -75,7 +76,6 @@
         </div>
 
         <script>
-
 
 
 
@@ -126,6 +126,13 @@
             $("#boardSearch").keyup(() => {
                 serachGet();
             })
+
+
+            $("#boardSearch").keypress(function (e) {
+                if (e.keyCode === 13) {
+                    serachGet();
+                }
+            });
 
             function deleteById(id) {
                 $.ajax({

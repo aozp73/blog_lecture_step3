@@ -1,6 +1,8 @@
 package shop.mtcoding.blog.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +23,7 @@ import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import shop.mtcoding.blog.dto.ResponseDto;
 import shop.mtcoding.blog.dto.admin.AdminReq.AdminRoleChangeReqDto;
+import shop.mtcoding.blog.dto.admin.AdminReq.AdminSendEmailReqDto;
 import shop.mtcoding.blog.dto.board.BoardResp.BoardADMINRespDto;
 import shop.mtcoding.blog.dto.reply.ReplyResp.ReplyDetailRespDto;
 import shop.mtcoding.blog.dto.user.UserReq.LoginReqDto;
@@ -47,6 +50,34 @@ public class AdminController {
     private final BoardService boardService;
     private final ReplyService replyService;
     private final AdminService adminService;
+
+    @PutMapping("/admin/email")
+    public ResponseEntity<?> tes(@RequestBody AdminSendEmailReqDto adminSendEmailReqDto) {
+        String beforeParse = adminSendEmailReqDto.getEmailList();
+        List<String> list = new ArrayList<>();
+        String content = "";
+        StringTokenizer st = new StringTokenizer(beforeParse, "/");
+        // System.out.println("테스트" + adminSendEmailReqDto.getEmailList());
+        while (st.hasMoreTokens()) {
+            list.add(st.nextToken());
+        }
+        for (String email : list) {
+            System.out.println("테스트1 : " + email);
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if (!list.get(i).contains("@")) {
+                content += list.get(i);
+                list.remove(i);
+            }
+        }
+
+        // for (String email : list) {
+        // System.out.println("테스트2 : " + email);
+        // }
+        // System.out.println("테스트2" + content);
+
+        return new ResponseEntity<>(new ResponseDto<>(1, "이메일 발송 성공", null), HttpStatus.CREATED);
+    }
 
     @GetMapping("admin/search/reply")
     public @ResponseBody String searchUser(Model model, String serachKeyword) {

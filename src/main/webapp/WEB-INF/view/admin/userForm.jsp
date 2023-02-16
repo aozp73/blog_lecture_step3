@@ -39,6 +39,7 @@
                         <thead>
                             <tr class="my-text-align">
                                 <th scope="col">#</th>
+                                <th scope="col">선택</th>
                                 <th scope="col">id</th>
                                 <th scope="col">회원등급</th>
                                 <th scope="col">유저 아이디</th>
@@ -54,43 +55,48 @@
                             <c:forEach items="${userList}" var="user">
                                 <tr class="my-text-align">
                                     <th scope="row"></th>
+                                    <td>
+                                        <span id="mailCheckBox-${user.id}"></span>
+                                    </td>
                                     <td>${user.id}</td>
-                                    <td>   
+                                    <td>
 
-                                    <c:if test="${user.role != 'ADMIN'}" >  
+                                        <c:if test="${user.role != 'ADMIN'}">
 
-                                    <select id="roleChange" name="role" onchange="changeRole(this, ${user.id})" >
+                                            <select id="roleChange" name="role"
+                                                onchange="changeRole(this, `${user.id}`)">
 
-                                        <c:choose>
-                                           <c:when test="${user.role == 'user'}">
-                                            <option value="user" selected>일반회원</option>
-                                           </c:when>
-                                           <c:otherwise>
-                                            <option value="user">일반회원</option>
-                                           </c:otherwise>
-                                        </c:choose>
+                                                <c:choose>
+                                                    <c:when test="${user.role == 'user'}">
+                                                        <option value="user" selected>일반회원</option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="user">일반회원</option>
+                                                    </c:otherwise>
+                                                </c:choose>
 
-                                        <c:choose>
-                                           <c:when test="${user.role == 'manager'}">
-                                            <option value="manager" selected>매니저</option>
-                                           </c:when>
-                                           <c:otherwise>
-                                            <option value="manager">매니저</option>
-                                           </c:otherwise>
-                                        </c:choose>
+                                                <c:choose>
+                                                    <c:when test="${user.role == 'manager'}">
+                                                        <option value="manager" selected>매니저</option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="manager">매니저</option>
+                                                    </c:otherwise>
+                                                </c:choose>
 
-                                    </select>
+                                            </select>
 
-                                    </c:if>
+                                        </c:if>
 
-                                    <c:if test="${user.role == 'ADMIN'}" >
+                                        <c:if test="${user.role == 'ADMIN'}">
                                             ${user.role}
-                                    </c:if>
+                                        </c:if>
 
                                     </td>
+
                                     <td>${user.username}</td>
                                     <td>${user.password}</td>
-                                    <td>${user.email}</td>
+                                    <td><span id="em-${user.id}">${user.email}</span></td>
                                     <td>${user.createdAtToString}</td>
                                     <c:if test="${user.username != 'ADMIN'}">
                                         <td><button onclick="deleteById(`${user.id}`)" class="btn-xs">삭제</button>
@@ -100,6 +106,12 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                    <div id="sendEmailBox" class="d-flex">
+                        <button class="btn btn-primary" type="button" onclick="sendList()">Email</button>
+                    </div>
+                    <div id="sendEmailContent">
+
+                    </div>
 
                 </div>
             </div>
@@ -108,13 +120,80 @@
         </div>
 
         <script>
-            function changeRole(obj, id){
 
-                let changeData ={
+            function sendList() {
+                if (document.getElementById('emailCheck')) {
+                    $("#emailCheck").remove();
+                    $("#sendEmailContent").empty();
+
+                    for (let index = 1; index <= `${userList.size()}`; index++) {
+                        $("#mailCheckBox-" + index).empty();
+                    }
+
+                } else {
+                    let el1 = `<div id="emailCheck"><button class="btn btn-warning" type="button" onclick="sendEmail()">Send</button></div>`;
+                    $("#sendEmailBox").append(el1);
+                    let el2 = `<textarea id="emailContent" name=""  cols="30" rows="10"></textarea>`;
+                    $("#sendEmailContent").append(el2);
+
+                    // let el11 = `<input class="form-check-input" type = "checkbox" value = "" id = "mailCheck-` + index + `">;`
+
+                    for (let index = 1; index <= `${userList.size()}`; index++) {
+                        let el3 = `<input class="form-check-input" type = "checkbox" value = "" id = "mailCheck-` +
+                            index +
+                            `">`
+
+                        $("#mailCheckBox-" + index).append(el3);
+                    }
+                }
+
+            }
+            function sendEmail() {
+                let cnt = 0;
+                let emailList = "";
+                for (let index = 1; index <= `${userList.size()}`; index++) {
+                    if ($('#mailCheck-' + index).is(':checked')) {
+                        // console.log($("#em-" + index).val());
+                        console.log($("#em-" + index).text());
+                        emailList += $("#em-" + index).text() + "/";
+                        cnt++;
+                    }
+                }
+                emailList += $("#emailContent").val() + "/"
+                console.log($("#emailContent").val());
+
+                let emailObj = {
+                    emailList: emailList
+                }
+                console.log("ajax통신전 디버깅" + emailObj.emailList);
+
+                $.ajax({
+                    type: "put",
+                    url: "/admin/email",
+                    data: JSON.stringify(emailObj),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                }).done((res) => {
+                    alert(res.msg);
+                    location.href = "/";
+                }).fail((err) => {
+                    alert(err.responseJSON.msg);
+                });
+            }
+
+
+
+
+
+
+
+            function changeRole(obj, id) {
+
+                let changeData = {
                     changeUserId: id,
                     changeRole: obj.value
                 }
-                
+
                 $.ajax({
                     type: "put",
                     url: "/admin/user/role",
@@ -124,7 +203,7 @@
                 }).done((res) => {
                     alert(res.msg);
                     location.href = "/admin/userForm";
-                }).fail((err)=>{
+                }).fail((err) => {
                     alert(err.responseJSON.msg);
                 });
 

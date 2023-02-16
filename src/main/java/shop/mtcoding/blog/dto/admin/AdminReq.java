@@ -17,4 +17,11 @@ public class AdminReq {
         private int changeUserId;
         private String changeRole;
     }
+
+    @Setter
+    @Getter
+    public static class AdminSendEmailReqDto {
+        private String emailList;
+
+    }
 }
