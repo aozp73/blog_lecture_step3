@@ -30,4 +30,17 @@ public class AdminEmailUtil {
 
         return message;
     }
+
+    public static List<String> parseEmail(AdminSendEmailReqDto adminSendEmailReqDto) {
+        List<String> list = new ArrayList<>();
+        String beforeParse = adminSendEmailReqDto.getEmailList();
+
+        StringTokenizer st = new StringTokenizer(beforeParse, "/");
+
+        while (st.hasMoreTokens()) {
+            list.add(st.nextToken());
+        }
+
+        return list;
+    }
 }

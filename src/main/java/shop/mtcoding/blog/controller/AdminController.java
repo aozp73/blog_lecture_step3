@@ -58,8 +58,20 @@ public class AdminController {
 
     @PutMapping("/admin/email")
     public ResponseEntity<?> tes(@RequestBody AdminSendEmailReqDto adminSendEmailReqDto) {
+        User ADMIN = (User) session.getAttribute("ADMIN");
+        if (ADMIN == null) {
+            throw new CustomApiException("관리자 권한이 없습니다", HttpStatus.FORBIDDEN);
+        }
 
-        javaMailSender.send(AdminEmailUtil.sendEmail(adminSendEmailReqDto));
+        // 유효성 검사
+        if (adminSendEmailReqDto.getTitle() == null || adminSendEmailReqDto.getTitle().isEmpty()) {
+            throw new CustomApiException("제목을 작성해주세요");
+        }
+        if (adminSendEmailReqDto.getContent() == null || adminSendEmailReqDto.getContent().isEmpty()) {
+            throw new CustomApiException("내용을 작성해주세요");
+        }
+
+        adminService.이메일전송(adminSendEmailReqDto);
 
         return new ResponseEntity<>(new ResponseDto<>(1, "이메일 전송 성공", null), HttpStatus.OK);
     }
