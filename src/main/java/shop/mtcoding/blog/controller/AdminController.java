@@ -1,15 +1,11 @@
 package shop.mtcoding.blog.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,7 +34,6 @@ import shop.mtcoding.blog.model.UserRepository;
 import shop.mtcoding.blog.service.AdminService;
 import shop.mtcoding.blog.service.BoardService;
 import shop.mtcoding.blog.service.ReplyService;
-import shop.mtcoding.blog.util.AdminEmailUtil;
 
 @RequiredArgsConstructor
 @Controller
@@ -53,8 +48,6 @@ public class AdminController {
     private final BoardService boardService;
     private final ReplyService replyService;
     private final AdminService adminService;
-
-    private final JavaMailSender javaMailSender;
 
     @PutMapping("/admin/email")
     public ResponseEntity<?> tes(@RequestBody AdminSendEmailReqDto adminSendEmailReqDto) {

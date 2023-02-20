@@ -64,7 +64,7 @@
                                         <c:if test="${user.role != 'ADMIN'}">
 
                                             <select id="roleChange" name="role"
-                                                onchange="changeRole(this, `${user.id}`)">
+                                                    onchange="changeRole(this, `${user.id}`)">
 
                                                 <c:choose>
                                                     <c:when test="${user.role == 'user'}">

@@ -2,7 +2,6 @@ package shop.mtcoding.blog.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.mail.javamail.JavaMailSender;
