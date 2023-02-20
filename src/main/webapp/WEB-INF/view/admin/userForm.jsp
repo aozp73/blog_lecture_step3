@@ -64,7 +64,7 @@
                                         <c:if test="${user.role != 'ADMIN'}">
 
                                             <select id="roleChange" name="role"
-                                                    onchange="changeRole(this, `${user.id}`)">
+                                                onchange="changeRole(this, `${user.id}`)">
 
                                                 <c:choose>
                                                     <c:when test="${user.role == 'user'}">
@@ -125,11 +125,9 @@
                 if (document.getElementById('emailCheck')) {
                     $("#emailCheck").remove();
                     $("#sendEmailContent").empty();
-
                     for (let index = 1; index <= `${userList.size()}`; index++) {
                         $("#mailCheckBox-" + index).empty();
                     }
-
                 } else {
                     let el1 = `<div id="emailCheck"><button class="btn btn-warning" type="button" onclick="sendEmail()">Send</button></div>`;
                     $("#sendEmailBox").append(el1);
@@ -137,18 +135,16 @@
                     let el3 = `<textarea id="emailContent" name=""  cols="30" rows="10"></textarea>`;
                     $("#sendEmailContent").append(el2);
                     $("#sendEmailContent").append(el3);
-
                     // let el11 = `<input class="form-check-input" type = "checkbox" value = "" id = "mailCheck-` + index + `">;`
-
                     for (let index = 2; index <= `${userList.size()}`; index++) {
                         let el3 = `<input class="form-check-input" type = "checkbox" value = "" id = "mailCheck-` +
                             index +
                             `">`
-                            $("#mailCheckBox-" + index).append(el3);
+                        $("#mailCheckBox-" + index).append(el3);
                     }
                 }
-
             }
+            
             function sendEmail() {
                 let cnt = 0;
                 let emailList = "";
@@ -163,7 +159,7 @@
                 let title = $("#emailTitle").val();
                 let content = $("#emailContent").val();
 
-                
+
                 // console.log($("#emailContent").val());
 
                 let emailObj = {

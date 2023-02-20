@@ -12,4 +12,13 @@ public class Love {
     private Integer boardId;
     private Integer userId;
     private Timestamp createdAt;
+
+    public Love() {
+    }
+
+    public Love(Integer boardId, Integer userId) {
+        this.boardId = boardId;
+        this.userId = userId;
+    }
+
 }

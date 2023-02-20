@@ -35,22 +35,22 @@
             function loveOrCancle(){
                 let boardId = $("#boardId").val()
                 let id= $("#heart").attr("value");
-                console.log(id);
+                // console.log(id);
              
-                if (id == undefined) {
+                if (id == "") {
                     // 좋아요 통신 요청 (POST)
-                    let data = {
+                    let board = {
                         boardId : boardId
                     }
 
                     $.ajax({
                         type: "post",
                         url: "/love",
-                        data : JSON.stringify(data),
+                        data : JSON.stringify(board),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json"
                     }).done((res) => {
-                        alert(res.msg);
+                        // alert(res.msg);
                         $("#heart").attr("value", res.data);
                         $("#heart").addClass("fa-solid");
                         $("#heart").removeClass("fa-regular");
@@ -66,8 +66,8 @@
                         url: "/love/"+id,
                         dataType: "json"
                     }).done((res) => {
-                        alert(res.msg);
-                        $("#heart").attr("value", undefined);
+                        // alert(res.msg);
+                        $("#heart").attr("value", res.data);
                         $("#heart").removeClass("fa-solid");
                         $("#heart").addClass("fa-regular");
 

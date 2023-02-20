@@ -55,7 +55,6 @@ public class AdminService {
 
         // 이메일 전송
         javaMailSender.send(AdminEmailUtil.sendEmail(adminSendEmailReqDto));
-
     }
 
     @Transactional(readOnly = true)
