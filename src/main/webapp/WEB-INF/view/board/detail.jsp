@@ -2,6 +2,8 @@
 
     <%@ include file="../layout/header.jsp" %>
 
+        <input type="hidden" id="boardId" value="${boardDto.id}">
+
         <div class="container my-3">
 
             <c:if test="${boardDto.userId == principal.id}">
@@ -17,8 +19,67 @@
                 글 번호 : <span id="id"><i>${boardDto.id} </i></span> 작성자 : <span class="me-3"><i>${boardDto.username}
                     </i></span>
 
-                <i id="heart" class="fa-regular fa-heart my-xl my-cursor" value="no"></i>
+            <c:choose>
+                <c:when test="${loveDto == null}">
+                        <i id="heart" class="fa-regular fa-heart fa-lg" value="${loveDto.id}" onclick="loveOrCancle()"></i>
+                </c:when>
+                
+                <c:otherwise>
+                        <i id="heart" class="fa-solid  fa-heart fa-lg" value="${loveDto.id}" onclick="loveOrCancle()"></i>
+                </c:otherwise>
+            </c:choose>
+
             </div>
+
+            <script>
+            function loveOrCancle(){
+                let boardId = $("#boardId").val()
+                let id= $("#heart").attr("value");
+                console.log(id);
+             
+                if (id == undefined) {
+                    // 좋아요 통신 요청 (POST)
+                    let data = {
+                        boardId : boardId
+                    }
+
+                    $.ajax({
+                        type: "post",
+                        url: "/love",
+                        data : JSON.stringify(data),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
+                    }).done((res) => {
+                        alert(res.msg);
+                        $("#heart").attr("value", res.data);
+                        $("#heart").addClass("fa-solid");
+                        $("#heart").removeClass("fa-regular");
+
+                    }).fail((err)=>{
+                        alert(err.responseJSON.msg);
+                    });
+
+                } else {
+                    // 좋아요 취소 통신 요청 (DELETE)
+                   $.ajax({
+                        type: "delete",
+                        url: "/love/"+id,
+                        dataType: "json"
+                    }).done((res) => {
+                        alert(res.msg);
+                        $("#heart").attr("value", undefined);
+                        $("#heart").removeClass("fa-solid");
+                        $("#heart").addClass("fa-regular");
+
+                    }).fail((err)=>{
+                        alert(err.responseJSON.msg);
+                    });
+                }
+
+            }
+            </script>
+
+
 
             <div>
                 <h1><b>${boardDto.title}</b></h1>
