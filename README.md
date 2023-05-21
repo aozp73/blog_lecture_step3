@@ -2,21 +2,34 @@
 
 <div align="center">
   <img width="60%" src="https://github.com/aozp73/aozp73/assets/122352251/008b21bb-aba2-4272-af58-0fd81cbd0697"/>
-</div> </br>
+</div> </br> </br>
 &nbsp; ① 해당 프로젝트는 2주간 진행하는 Blog 강의를 들으면서 상세한 개념 학습과 더불어 진행되었음 </br>
-&nbsp; ② 강의 전 개인적으로 혼자 진행해보고 싶은 욕심에 혼자 진행한 프로젝트는 따로 Git Main에 첨부하였음</br></br>
+&nbsp; ② 강의 전 개인적으로 혼자 진행해보고 싶은 욕심에 진행한 개인 블로그 프로젝트는 Git Main에 같이 첨부</br></br>
 &nbsp;&nbsp;📝 Git Repository&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp; https://github.com/aozp73/blog_lecture_step3 </br>
 </br></br>
 
-## 만들면서 느낀 점 / 어려웠던 부분
-&nbsp;&nbsp;※ 프로필 사진 기능 외 나머지 기능을 혼자 독학으로 구현하고자 목표를 설정하면서 해당 기능은 제외하고 구현
-
-#### MVC 각 layer의 책임
-  - 개념적으론 Controller는 인증, 권한, 유효성 검사 / Service는 트랜잭션, 비즈니스, 권한 처리 / Repository는 JPA나 Mybatis를 활용하여 DB와 통신한다고 배웠다.
-  - 실제로 뭔가를 만들고, 유지 보수와 디버깅 과정에 대해서 생각해 볼 기회를 가질 수 있었고, 각 layer의 책임을 분리하는 것이 얼마나 중요할지 체감할 수 있었다.
-  - 이번 프로젝트는 다른 여러 포트폴리오의 결과물들에 비해 간단한 편이기 때문에 에러 메시지에서 지체한 부분은 적었다. 
-  - Controller와 Service, View의 책임을 구분하지 않은 상태에서 코드가 복잡했다면 유지 보수와 디버깅에 많은 시간을 할애했을 것이다.
-  - 어느 부분에서 문제가 생겼는지, 정확하고 올바르게 이해하려면 최초 코드 작성 때부터 생각해야 될 부분이다.
+## 만들면서 배운 점
+#### HTTP Status
+- 200(OK), 201(Created), 400(Bad Request), 401(Unauthorized), 403(Forbidden), 500(Internal Server Error) 등
+- 위와 같은 상태코드를 Front에 응답하여 프로토콜에 따라 효율적인 결과 처리 및 인지 가능
+#### CustomException 처리 (유효성/인증/권한)
+- 정상적인 접근 또는 PostMan을 통한 비정상적인 접근 시 유효성/인증/권한 처리를 해야 함
+- CustomException 처리를 하여, 어떤 과정으로 이런 처리를 할 수 있는지 학습
+- 해당 프로젝트 이후엔 Security, AOP, 리플렉션을 활용하여 처리하는 방법을 학습하였음
+#### Session 활용
+- Session을 활용하여 어떤 의미에선 RestFul한 상태로 이전에 왔던 어떤 사용자인지 기록
+- 인증 및 권한 처리에 활용할 수 있었으며, View에선 if문을 통해 로그인한 유저에게만 구별하여 아이콘 등을 출력 가능
+#### BackEnd - FrontEnd 협업
+- Front에서는 최대한 화면을 그리는 것에 집중 해야함
+- 따라서, 비지니스 로직같은 경우 최대한 Back단에서 처리하여 넘겨줘야 함
+#### Mybatis CRUD 및 Join Query
+- 기본적인 CRUD를 생성하여 진행
+- 여러 Table을 조회하여 뿌려야 할 경우 inner join, outer join 활용
+- 한방 Query & primitive한 Query로 여러번 조회하는 것을 배웠는데 모듈적인 측면에서는 primitive한 Query를 사용
+#### DTO 생성
+- Request, Response 통신 시 DTO를 활용하여 데이터를 주고 받음
+- 여러 화면에서 공통적으로 데이터를 뿌리더라도 무조건 DTO는 별개로 생성
+- 추후에 요구사항이 어떻게 바뀔지 예측할 수 없으므로, 특정 화면에서 필요한 데이터가 달라질 가능성이 많음
 </br>
 
 ## 기술스택
@@ -29,18 +42,21 @@
 </br>
 
 ## 기능정리
+&nbsp; ※ 4~5단계에 페이징, 검색, 아이디 중복체크는 강의 시간 부족으로 진행 x </br>
+&nbsp;&nbsp;&nbsp;&nbsp; 혼자 독학하여 진행, (개인) 블로그 프로젝트에 반영
+
 ### 1단계 (완료)
 - 회원가입, 로그인, 글쓰기, 글목록보기, 글상세보기, 글삭제, 글수정, 섬네일 보기
 ### 2단계 (완료)
 - 댓글쓰기, 댓글목록보기, 댓글삭제, 프로필 사진추가 및 변경하기, 프로필 사진보기
 ### 3단계 (완료)
 - 좋아요하기, 좋아요취소, 좋아요보기
-### 4단계 (완료)
-- 아이디중복체크, 회원수정하기
+
+
 </br>
 
 ## 기능상세 (기술블로그 첨부)
-&nbsp;&nbsp;※ 각 Topic 진행 후 Test 진행, 같이 첨부하였음
+&nbsp;&nbsp;※ 각 Topic 진행 후 Test 진행, 해당되는 기술 포스팅에 포함
 #### 1단계
 - 화면구현 : JSP, JQuery, BootStrap, Grid, Flex 등을 활용하여 진행 (https://blog.naver.com/aozp73/223107329485)
 - 유효성/인증/권한처리 : CustomException을 만들어 비정상적인 접근시 안내문구 출력 (https://blog.naver.com/aozp73/223107332914)
@@ -62,20 +78,23 @@
 
 ## 기능캡쳐
 #### 프로필사진 변경 
-<img width="60%" src="https://github.com/aozp73/aozp73/assets/122352251/ff6f6616-d96f-4b1c-a1d6-cf8b05469de7"/></br></br>
+<img width="50%" src="https://github.com/aozp73/aozp73/assets/122352251/ff6f6616-d96f-4b1c-a1d6-cf8b05469de7"/></br></br>
 
 #### 글쓰기 (summernote) 
-<img width="60%" src="https://github.com/aozp73/aozp73/assets/122352251/7b17b230-2ecd-408d-8b43-fa3e3ce6213a"/></br></br>
+<img width="50%" src="https://github.com/aozp73/aozp73/assets/122352251/7b17b230-2ecd-408d-8b43-fa3e3ce6213a"/></br></br>
 
 #### 글 수정/삭제, 좋아요, 썸네일
-<img width="60%" src="https://github.com/aozp73/aozp73/assets/122352251/457fdbd2-8a96-4e8f-997b-01c02d900b8a"/></br></br>
+<img width="50%" src="https://github.com/aozp73/aozp73/assets/122352251/457fdbd2-8a96-4e8f-997b-01c02d900b8a"/></br></br>
 
 #### 개인정보 수정/로그아웃
-<img width="60%" src="https://github.com/aozp73/aozp73/assets/122352251/25b5cc41-867e-4c5c-8832-c11e7227a529"/></br></br>
+<img width="50%" src="https://github.com/aozp73/aozp73/assets/122352251/25b5cc41-867e-4c5c-8832-c11e7227a529"/></br></br>
 </br>
 
 ## 모델링
-<img width="80%" src="https://github.com/aozp73/aozp73/assets/122352251/75e376c2-8b16-4507-971b-bed66915cf39"/>
+<div align="center">
+<img width="60%" src="https://github.com/aozp73/aozp73/assets/122352251/81493c20-8d8e-423a-92b0-a9dafabe02bc"/>
+</div>
+
 
 ### 1단계 (완료)
 - User
