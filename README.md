@@ -73,7 +73,7 @@
 - 댓글 삭제 : AJAX 통신과 부분 ReLoading(id값을 타겟으로 remove) 학습 (https://blog.naver.com/aozp73/223107359773)
 - 프로필 사진 : UUID를 활용하여 하드디스크에 Base64 저장, 경로 View에 반환 (https://blog.naver.com/aozp73/223107361778)
 #### 3단계
-- 좋아요 : addClass, removeClass를 활용하여 DB조회 후 좋아요 하기/취 구현 (https://blog.naver.com/aozp73/223107365360)
+- 좋아요 : addClass, removeClass를 활용하여 DB조회 후 좋아요/좋아요 취소 구현 (https://blog.naver.com/aozp73/223107365360)
 </br>
 
 ## 기능캡쳐
