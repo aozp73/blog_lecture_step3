@@ -58,22 +58,22 @@
 ## 기능상세 (기술블로그 첨부)
 &nbsp;&nbsp;※ 각 Topic 진행 후 Test 진행, 해당되는 기술 포스팅에 포함
 #### 1단계
-- 화면구현 : JSP, JQuery, BootStrap, Grid, Flex 등을 활용하여 진행 (https://blog.naver.com/aozp73/223107329485)
-- 유효성/인증/권한처리 : CustomException을 만들어 비정상적인 접근시 안내문구 출력 (https://blog.naver.com/aozp73/223107332914)
-- 로그인 : 요청 DTO생성 및 통합테스트 진행, 로그인시 Session에 해당 Object 저장 (https://blog.naver.com/aozp73/223107334056)
-- 게시글 작성 : Session 체크하여 로그인 유저가 아니라면 CustomException처리 (https://blog.naver.com/aozp73/223107338510)
-- 게시글 목록 : 테스트 시 ObjectMapper로 결과 확인, Query에 InnerJoin활용 (https://blog.naver.com/aozp73/223107340589)
-- 게시글 상세 : DTO는 요구사항이 달라질 수 있으므로 재사용하지 않음 (https://blog.naver.com/aozp73/223107343107)
-- 게시글 삭제 : DELETE는 Request Body가 없으므로 유효성 검사 x (https://blog.naver.com/aozp73/223107344071)
-- 게시글 수정 : AJAX 통신을 활용, JSON으로 데이터 받아서 진행 (https://blog.naver.com/aozp73/223107348863)
-- 섬네일 : 해당 프로젝트에선 Base64를 직접 파싱 x, JSoup 활용 (https://blog.naver.com/aozp73/223107350532)
+- 화면구현 : JSP, JQuery, BootStrap, Grid, Flex 등을 활용하여 진행 <br> (https://blog.naver.com/aozp73/223107329485)
+- 유효성/인증/권한처리 : CustomException을 만들어 비정상적인 접근시 안내문구 출력 <br> (https://blog.naver.com/aozp73/223107332914)
+- 로그인 : 요청 DTO생성 및 통합테스트 진행, 로그인시 Session에 해당 Object 저장 <br> (https://blog.naver.com/aozp73/223107334056)
+- 게시글 작성 : Session 체크하여 로그인 유저가 아니라면 CustomException처리 <br> (https://blog.naver.com/aozp73/223107338510)
+- 게시글 목록 : 테스트 시 ObjectMapper로 결과 확인, Query에 InnerJoin활용 <br> (https://blog.naver.com/aozp73/223107340589)
+- 게시글 상세 : DTO는 요구사항이 달라질 수 있으므로 재사용하지 않음 <br> (https://blog.naver.com/aozp73/223107343107)
+- 게시글 삭제 : DELETE는 Request Body가 없으므로 유효성 검사 x <br> (https://blog.naver.com/aozp73/223107344071)
+- 게시글 수정 : AJAX 통신을 활용, JSON으로 데이터 받아서 진행 <br> (https://blog.naver.com/aozp73/223107348863)
+- 섬네일 : 해당 프로젝트에선 Base64를 직접 파싱 x, JSoup 활용 <br> (https://blog.naver.com/aozp73/223107350532)
 #### 2단계
-- 댓글 쓰기 : 단계별 진행, 새로운 Reply Table 생성 후 MyBatis 기본 CRUD 작성 (https://blog.naver.com/aozp73/223107354637)
-- 댓글 목록보기 : 한방 Query, Primitive Query 학습. Privimitve Query로 모듈화하기 (https://blog.naver.com/aozp73/223107358897)
-- 댓글 삭제 : AJAX 통신과 부분 ReLoading(id값을 타겟으로 remove) 학습 (https://blog.naver.com/aozp73/223107359773)
-- 프로필 사진 : UUID를 활용하여 하드디스크에 Base64 저장, 경로 View에 반환 (https://blog.naver.com/aozp73/223107361778)
+- 댓글 쓰기 : 단계별 진행, 새로운 Reply Table 생성 후 MyBatis 기본 CRUD 작성 <br> (https://blog.naver.com/aozp73/223107354637)
+- 댓글 목록보기 : 한방 Query, Primitive Query 학습. Privimitve Query로 모듈화하기 <br> (https://blog.naver.com/aozp73/223107358897)
+- 댓글 삭제 : AJAX 통신과 부분 ReLoading(id값을 타겟으로 remove) 학습 <br> (https://blog.naver.com/aozp73/223107359773)
+- 프로필 사진 : UUID를 활용하여 하드디스크에 Base64 저장, 경로 View에 반환 <br> (https://blog.naver.com/aozp73/223107361778)
 #### 3단계
-- 좋아요 : addClass, removeClass를 활용하여 DB조회 후 좋아요/좋아요 취소 구현 (https://blog.naver.com/aozp73/223107365360)
+- 좋아요 : addClass, removeClass를 활용하여 DB조회 후 좋아요/좋아요 취소 구현 <br> (https://blog.naver.com/aozp73/223107365360)
 </br>
 
 ## 기능캡쳐
