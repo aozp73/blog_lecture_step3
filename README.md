@@ -4,8 +4,8 @@
   <img width="60%" src="https://github.com/aozp73/aozp73/assets/122352251/008b21bb-aba2-4272-af58-0fd81cbd0697"/>
 </div> </br> </br>
 &nbsp; ① 해당 프로젝트는 2주간 진행하는 Blog 강의를 들으면서 상세한 개념 학습과 더불어 진행되었음 </br>
-&nbsp; ② 강의 전 개인적으로 혼자 진행해보고 싶은 욕심에 진행한 개인 블로그 프로젝트는 Git Main에 같이 첨부</br></br>
-&nbsp;&nbsp;📝 Git Repository&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp; https://github.com/aozp73/blog_lecture_step3 </br>
+&nbsp; ② 강의 전 개인적으로 혼자 진행해보고 싶은 욕심에 진행한 개인 블로그 프로젝트는 Git Repository에서 진행</br></br>
+&nbsp;&nbsp;📝 Git Repository&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp; https://github.com/aozp73/blog </br>
 </br></br>
 
 ## 만들면서 배운 점
