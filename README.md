@@ -78,21 +78,34 @@
 
 ## 기능캡쳐
 #### 프로필사진 변경 
-<img width="50%" src="https://github.com/aozp73/aozp73/assets/122352251/ff6f6616-d96f-4b1c-a1d6-cf8b05469de7"/></br></br>
+<div align="center">
+  <img width="50%" src="https://github.com/aozp73/aozp73/assets/122352251/ff6f6616-d96f-4b1c-a1d6-cf8b05469de7"/>
+</div>
+</br></br>
 
 #### 글쓰기 (summernote) 
-<img width="50%" src="https://github.com/aozp73/aozp73/assets/122352251/7b17b230-2ecd-408d-8b43-fa3e3ce6213a"/></br></br>
+<div align="center">
+  <img width="50%" src="https://github.com/aozp73/aozp73/assets/122352251/7b17b230-2ecd-408d-8b43-fa3e3ce6213a"/>
+</div>
+</br></br>
 
 #### 글 수정/삭제, 좋아요, 썸네일
-<img width="50%" src="https://github.com/aozp73/aozp73/assets/122352251/457fdbd2-8a96-4e8f-997b-01c02d900b8a"/></br></br>
+<div align="center">
+  <img width="50%" src="https://github.com/aozp73/aozp73/assets/122352251/457fdbd2-8a96-4e8f-997b-01c02d900b8a"/>
+</div>
+</br></br>
 
 #### 개인정보 수정/로그아웃
-<img width="50%" src="https://github.com/aozp73/aozp73/assets/122352251/25b5cc41-867e-4c5c-8832-c11e7227a529"/></br></br>
+<div align="center">
+  <img width="50%" src="https://github.com/aozp73/aozp73/assets/122352251/25b5cc41-867e-4c5c-8832-c11e7227a529"/>
+</div>
+</br></br>
+
 </br>
 
 ## 모델링
 <div align="center">
-<img width="60%" src="https://github.com/aozp73/aozp73/assets/122352251/81493c20-8d8e-423a-92b0-a9dafabe02bc"/>
+  <img width="60%" src="https://github.com/aozp73/aozp73/assets/122352251/81493c20-8d8e-423a-92b0-a9dafabe02bc"/>
 </div>
 
 
